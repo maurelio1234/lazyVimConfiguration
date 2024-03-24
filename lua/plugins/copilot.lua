@@ -4,7 +4,7 @@ return {
     opts = {
       suggestion = {
         auto_trigger = true,
-        enabled = true,
+        enabled = false,
       },
       filetypes = {
         ["*"] = true,
