@@ -19,7 +19,6 @@ vim.api.nvim_create_user_command("ToggleDarkLight", function(opts)
     end
 end, {})
 
-
 vim.api.nvim_create_user_command("SwitchTestCode", function()
     local function splitPath(path)
         local parts = {}
@@ -85,3 +84,14 @@ vim.api.nvim_create_user_command("SwitchTestCode", function()
     print("Matching file not found.")
 end, {})
 
+
+vim.api.nvim_create_user_command("ShowFilePathFromGitRoot", function()
+  local file_path = vim.fn.expand('%:p') -- Get the full path of the current file
+  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.expand('%:p:h') .. ' rev-parse --show-toplevel')[1]
+  if vim.v.shell_error == 0 then -- Check if the git command was successful
+    local relative_path = file_path:sub(#git_root + 2) -- Calculate the relative path
+    print(relative_path)
+  else
+    print('Not inside a Git repository.')
+  end
+end, {})
