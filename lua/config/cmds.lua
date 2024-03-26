@@ -10,3 +10,11 @@ vim.api.nvim_create_user_command("TempBuffer", function(opts)
     vim.api.nvim_buf_set_name(0, opts.args)
   end
 end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("ToggleDarkLight", function(opts)
+    if vim.o.background == "dark" then
+        vim.o.background = "light"
+    else
+        vim.o.background = "dark"
+    end
+end, {})
