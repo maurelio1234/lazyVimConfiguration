@@ -95,3 +95,51 @@ vim.api.nvim_create_user_command("ShowFilePathFromGitRoot", function()
     print('Not inside a Git repository.')
   end
 end, {})
+
+vim.api.nvim_create_user_command('FindVueFiles', function()
+  -- Yank the current word under cursor
+  vim.cmd('normal! "vyiw')
+  -- Get the yanked word from register v
+  local yanked_word = vim.fn.getreg('v')
+  -- Find the root of the git repository
+  local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
+  -- Prepare the git command to list files that match the pattern
+  local git_cmd = 'git -C ' .. git_root .. ' ls-files | grep ' .. yanked_word .. '.vue'
+  -- Execute the git command and capture the output
+  local result = vim.fn.systemlist(git_cmd)
+  if #result == 0 then
+    print("No .vue files found matching: " .. yanked_word)
+    return
+  elseif #result == 1 then
+    print("single result " .. result[1])
+    -- Extract the file path from the result
+    -- Assuming result is in the format "file_path:line_number:matched_text"
+    local file_path = vim.split(result[1], ':')[1]
+    -- Edit the file if only one match is found
+    vim.cmd('edit ' .. git_root .. '/' .. file_path)
+  end
+  -- Adjusting for Telescope to display the matched files
+  require('telescope.builtin').find_files({ cwd = git_root, search_dirs = {git_root}, default_text = yanked_word .. '.vue' })
+end, {})
+
+vim.api.nvim_create_user_command('FindVueUsages', function()
+  -- Get the current file name without the path and extension
+  local file_name = vim.fn.expand('%:t:r')
+  -- If the file has a .vue extension, remove it from the file name (optional step based on extension presence)
+  if vim.fn.expand('%:e') == 'vue' then
+    file_name = vim.fn.expand('%:t:r')
+  end
+  -- Find the root of the git repository
+  local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
+  -- Prepare the git grep command to find occurrences of <FileName
+  local grep_pattern = "'<" .. file_name .. "'"
+  local git_grep_cmd = 'git -C ' .. git_root .. ' grep -E ' .. grep_pattern .. ' -- ' .. git_root
+  -- Execute the git grep command and capture the output
+  local result = vim.fn.systemlist(git_grep_cmd)
+  if #result == 0 then
+    print("No instances found for: <" .. file_name)
+    return
+  end
+  -- Display the results with Telescope
+  require('telescope.builtin').grep_string({ search = "<" .. file_name, cwd = git_root })
+end, {})
