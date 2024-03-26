@@ -18,8 +18,13 @@ return {
     config = function()
       local nvimbattery = {
         function()
-          return require("battery").get_status_line()
-        end,
+            local m_battery = require("battery")
+            if not m_battery.get_battery_status().ac_power then
+                return m_battery.get_status_line()
+            else 
+                return ""
+            end
+        end
       }
       require("lualine").setup({
         update_rate_seconds = 120,
