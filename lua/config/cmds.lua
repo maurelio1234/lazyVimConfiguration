@@ -143,3 +143,10 @@ vim.api.nvim_create_user_command('FindVueUsages', function()
   -- Display the results with Telescope
   require('telescope.builtin').grep_string({ search = "<" .. file_name, cwd = git_root })
 end, {})
+
+vim.api.nvim_create_user_command('Magit', function()
+    LazyVim.terminal(
+        { 'emacs', '-nw', '-eval', '(progn (magit-status) (delete-other-windows))' },
+        { cwd = LazyVim.root() }
+    )
+end, {})
