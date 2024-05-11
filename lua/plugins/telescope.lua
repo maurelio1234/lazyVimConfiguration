@@ -17,7 +17,15 @@ return {
             }
         },
         config = function()
-            require("telescope").load_extension("live_grep_args")
+            local telescope = require('telescope')
+            telescope.load_extension("live_grep_args")
+            telescope.setup {
+                pickers = {
+                    git_files = {
+                        path_display = { "truncate" },
+                    }
+                },
+            }
         end
     }
 }
