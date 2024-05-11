@@ -4,3 +4,5 @@
 vim.keymap.set("n", "<leader>cw", "<cmd>SwitchTestCode<cr>", { desc = "Switch between test and code" })
 vim.keymap.set("n", "<leader>gm", "<cmd>Magit<cr>", { desc = "Magit" })
 vim.keymap.set("n", "<leader>fN", "<cmd>ShowFilePathFromGitRoot<cr>", { desc = "Show current file path from git root" })
+vim.keymap.set("n", "<leader>cg", "<cmd>LiveGrepCurrentWord<cr>", { desc = "Grep current word in project "})
+vim.keymap.set("n", "<leader>cL", "<cmd>GitFilesCurrentWord<cr>", { desc = "Find file named after current word in project "})

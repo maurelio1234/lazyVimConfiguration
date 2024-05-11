@@ -144,6 +144,18 @@ vim.api.nvim_create_user_command('FindVueUsages', function()
   require('telescope.builtin').grep_string({ search = "<" .. file_name, cwd = git_root })
 end, {})
 
+vim.api.nvim_create_user_command('LiveGrepCurrentWord', function()
+    local telescope = require('telescope.builtin')
+    local word = vim.fn.expand('<cword>')
+    telescope.live_grep({ default_text = word })
+end, {})
+
+vim.api.nvim_create_user_command('GitFilesCurrentWord', function()
+    local telescope = require('telescope.builtin')
+    local word = vim.fn.expand('<cword>')
+    telescope.git_files({ default_text = word })
+end, {})
+
 vim.api.nvim_create_user_command('Magit', function()
     LazyVim.terminal(
         { 'emacs', '-nw', '-eval', '(progn (magit-status) (delete-other-windows))' },
