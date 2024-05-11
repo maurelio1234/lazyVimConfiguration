@@ -14,6 +14,16 @@ return {
                 "<leader>/",
                 function () require("telescope").extensions.live_grep_args.live_grep_args() end,
                 desc = "Grep with live args"
+            },
+            {
+                "<leader>fh",
+                function() require("telescope.builtin").help_tags() end,
+                desc = "Help tags"
+            },
+            {
+                "<leader>fC",
+                function() require("telescope.builtin").commands() end,
+                desc = "Command"
             }
         },
         config = function()
