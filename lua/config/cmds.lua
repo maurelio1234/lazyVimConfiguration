@@ -162,3 +162,7 @@ vim.api.nvim_create_user_command('Magit', function()
         { cwd = LazyVim.root() }
     )
 end, {})
+
+vim.api.nvim_create_user_command('CopyCurrentPwd', function()
+    os.execute("echo 'cd ' $(pwd) | pbcopy")
+end, {})
