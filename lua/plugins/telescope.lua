@@ -30,16 +30,8 @@ return {
             local telescope = require('telescope')
             telescope.load_extension("live_grep_args")
             telescope.setup {
-                pickers = {
-                    buffers = {
-                        path_display = { "truncate" },
-                    },
-                    git_files = {
-                        path_display = { "truncate" },
-                    },
-                    old_files = {
-                        path_display = { "truncate" },
-                    }
+                defaults = {
+                    path_display = { "truncate" },
                 },
             }
         end
