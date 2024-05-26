@@ -2,12 +2,6 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
--- setting the working directory to the current buffer's directory
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*",
-    command = "lcd %:p:h",
-})
-
 vim.api.nvim_create_augroup("VueMappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "vue",
