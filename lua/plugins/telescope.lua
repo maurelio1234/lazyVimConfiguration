@@ -31,6 +31,9 @@ return {
             telescope.load_extension("live_grep_args")
             telescope.setup {
                 defaults = {
+                    layout_config = {
+                        width = 0.9,
+                    },
                     path_display = { "truncate" },
                 },
             }
