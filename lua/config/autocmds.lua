@@ -12,3 +12,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_augroup("LuaMappings", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  group = "LuaMappings",
+  callback = function()
+    vim.bo.shiftwidth = 2
+  end,
+})
