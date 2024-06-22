@@ -11,6 +11,17 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cu', ':FindVueUsages<CR>', { noremap = true, silent = true, desc = "Find possible usages of current component"})
   end,
 })
+vim.api.nvim_create_augroup("ExercismMappings", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  group = "ExercismMappings",
+  callback = function()
+    local filepath = vim.fn.expand('%:p:h')
+    if string.match(filepath, '/Users/Marcos/Exercism') then
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ct', ':terminal cd %:p:h && exercism test<CR>', { noremap = true, silent = true, desc = "Run test" })
+    end
+  end,
+})
 
 vim.api.nvim_create_augroup("LuaMappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
