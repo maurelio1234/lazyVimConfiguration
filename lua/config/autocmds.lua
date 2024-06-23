@@ -22,6 +22,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  group = "ExercismMappings",
+  callback = function()
+    local filepath = vim.fn.expand('%:p:h')
+    if string.match(filepath, '/Users/Marcos/Exercism') then
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cb', ':terminal cd %:p:h && exercism submit<CR>', { noremap = true, silent = true, desc = "Submit file" })
+    end
+  end,
+})
 
 vim.api.nvim_create_augroup("LuaMappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
