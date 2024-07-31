@@ -41,3 +41,12 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.shiftwidth = 2
   end,
 })
+vim.api.nvim_create_augroup("RandomMappings", { clear = true })
+vim.api.nvim_create_autocmd("CursorHold", {
+  pattern = "*",
+  group = "RandomMappings",
+  callback = function()
+    require("precognition").peek()
+  end,
+})
+
