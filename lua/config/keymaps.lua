@@ -10,10 +10,11 @@ vim.keymap.set("n", "<leader>cg", "<cmd>LiveGrepCurrentWord<cr>", { desc = "Grep
 vim.keymap.set("n", "<leader>cL", "<cmd>GitFilesCurrentWord<cr>", { desc = "Find file named after current word in project "})
 
 if vim.g.neovide then
-  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
-  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
-  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
-  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  vim.keymap.set(
+    {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
+    '<D-v>',
+    function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
+    { noremap = true, silent = true }
+  )
 end
 
