@@ -46,7 +46,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
   pattern = "*",
   group = "RandomMappings",
   callback = function()
-    require("precognition").peek()
+    if (math.random() > 0.5) then
+      require("precognition").peek()
+    end
   end,
 })
 
