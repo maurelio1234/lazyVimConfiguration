@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = "VueMappings",
   callback = function()
     vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cI', ':FindVueFiles<CR>', { noremap = true, silent = true, desc = "Find possible implementations of current compoennt" })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cu', ':FindVueUsages<CR>', { noremap = true, silent = true, desc = "Find possible usages of current component"})
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cU', ':FindVueUsages<CR>', { noremap = true, silent = true, desc = "Find possible usages of current component"})
   end,
 })
 vim.api.nvim_create_augroup("ExercismMappings", { clear = true })
