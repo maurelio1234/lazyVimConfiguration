@@ -1,1 +1,1 @@
-dofile("/Users/Marcos/Personal/Code/perso-360learning/nvim/init.lua")
+dofile("/Users/marcos.almeida/git/perso-360learning/nvim/init.lua")
