@@ -40,13 +40,25 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require('lspconfig')
+      lspconfig.sourcekit.setup {
+        capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+        },
+      }
+    end,
     opts = {
       servers = {
         vtsls = {
           settings = {
             typescript = {
               tsserver = {
-                 maxTsServerMemory = 8192
+                maxTsServerMemory = 8192
               }
             }
           }
